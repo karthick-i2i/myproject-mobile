@@ -1,4 +1,4 @@
-package ideas2it.com.aaas;
+package myproject.com.aaas;
 
 import org.junit.Test;
 
