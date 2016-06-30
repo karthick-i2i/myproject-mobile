@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "ideas2it.com.aaas"
+        applicationId "myproject.com.aaas"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -30,9 +30,7 @@ dependencies {
     compile 'me.dm7.barcodescanner:zxing:1.8.4'
 
     //retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-
-    compile 'com.google.code.gson:gson:2.3.1'
-
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 
 }

@@ -12,11 +12,11 @@ import myproject.com.api.APIResponse;
 import myproject.com.api.RetrofitAPIBuilder;
 import myproject.com.api.UserApp;
 import myproject.com.api.UserAppService;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
 
 public class QRScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView mScannerView;

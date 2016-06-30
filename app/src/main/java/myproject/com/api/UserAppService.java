@@ -9,7 +9,7 @@ import retrofit2.http.Path;
  */
 public interface UserAppService {
 
-    @POST("users")
+    @POST("users/saveUserQRCode/{username}/{qrcode}")
     Call<APIResponse<UserApp>> saveUserQRCode(
             @Path("username") String username,
             @Path("qrcode") String qrcode);
