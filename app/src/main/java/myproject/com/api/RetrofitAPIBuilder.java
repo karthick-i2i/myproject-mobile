@@ -16,7 +16,7 @@ public class RetrofitAPIBuilder {
         final OkHttpClient okHttpClient = new OkHttpClient();
         if(retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://localhost:8080/services/api/")
+                    .baseUrl("http://d58ae3e4.ngrok.io/services/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient)
                     .build();

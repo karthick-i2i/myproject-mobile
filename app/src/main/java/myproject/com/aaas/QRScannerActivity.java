@@ -1,5 +1,6 @@
 package myproject.com.aaas;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,15 +61,16 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
                         .getExtras().get("musername").toString(),
                 rawResult.getText());
         call.enqueue(new Callback<APIResponse<UserApp>>() {
-
-
             @Override
             public void onResponse(Call<APIResponse<UserApp>> call, Response<APIResponse<UserApp>> response) {
                 Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_LONG).show();
+                Intent result = new Intent(QRScannerActivity.this, ResultActivity.class);
+                startActivity(result);
             }
 
             @Override
             public void onFailure(Call<APIResponse<UserApp>> call, Throwable t) {
+                Log.e("handler", "1"+t.getMessage()); // Prints the scan format (qrcode)
 
             }
 
