@@ -18,9 +18,10 @@ public class RetrofitAPIBuilder extends AppCompatActivity {
     //"http://localhost:8080
     public static Retrofit getInstance(String baseURL) {
         final OkHttpClient okHttpClient = new OkHttpClient();
+        String url = baseURL+"/services/api/";
         if(retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseURL+"/services/api/")
+                    .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient)
                     .build();

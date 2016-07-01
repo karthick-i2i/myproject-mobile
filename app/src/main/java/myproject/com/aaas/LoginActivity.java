@@ -35,9 +35,6 @@ public class LoginActivity extends AppCompatActivity{
 
         // save base api url
         mbase_url = (EditText) findViewById(R.id.base_url);
-        SharedPreferences.Editor editor = getSharedPreferences("base_url", MODE_PRIVATE).edit();
-        editor.putString("base_url", mbase_url.getText().toString());
-        editor.commit();
 
         Button mSignInButton = (Button) findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(new OnClickListener() {
@@ -86,6 +83,7 @@ public class LoginActivity extends AppCompatActivity{
         } else {
             Intent qrcode = new Intent(LoginActivity.this, QRScannerActivity.class);
             qrcode.putExtra("musername", username);
+            qrcode.putExtra("base_url", base_url);
             this.startActivity(qrcode);
 
         }

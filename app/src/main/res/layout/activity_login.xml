@@ -55,8 +55,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/base_url"
                     android:inputType="text"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:text="http://" />
 
             </android.support.design.widget.TextInputLayout>
 

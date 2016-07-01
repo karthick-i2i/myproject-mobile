@@ -55,9 +55,8 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
         Log.e("handler", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode)
         Log.e("handler", getIntent().getExtras().get("musername").toString());
 
-        SharedPreferences prefs = getSharedPreferences("base_url", MODE_PRIVATE);
-        final String base_url = prefs.getString("base_url", null);
 
+        String base_url = getIntent().getExtras().get("base_url").toString();
         Retrofit retrofitAPI = RetrofitAPIBuilder.getInstance(base_url);
         UserAppService userAppService = retrofitAPI.create(UserAppService.class);
 
@@ -73,7 +72,7 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
             }
             @Override
             public void onFailure(Call<APIResponse<UserApp>> call, Throwable t) {
-                Log.e("handler",t.getMessage());
+                Log.e("handler","Error "+t.getMessage());
             }
             // If you would like to resume scanning, call this method below:
             // mScannerView.resumeCameraPreview(this);
