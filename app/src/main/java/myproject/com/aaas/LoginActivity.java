@@ -1,6 +1,8 @@
 package myproject.com.aaas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity{
 
     // UI references.
     private EditText musername;
+    private EditText mbase_url;
     private View mLoginFormView;
 
     @Override
@@ -29,6 +32,12 @@ public class LoginActivity extends AppCompatActivity{
 
         // Set up the login form.
         musername = (EditText) findViewById(R.id.username);
+
+        // save base api url
+        mbase_url = (EditText) findViewById(R.id.base_url);
+        SharedPreferences.Editor editor = getSharedPreferences("base_url", MODE_PRIVATE).edit();
+        editor.putString("base_url", mbase_url.getText().toString());
+        editor.commit();
 
         Button mSignInButton = (Button) findViewById(R.id.sign_in_button);
         mSignInButton.setOnClickListener(new OnClickListener() {
@@ -52,6 +61,7 @@ public class LoginActivity extends AppCompatActivity{
 
         // Store values at the time of the login attempt.
         String username = musername.getText().toString();
+        String base_url = mbase_url.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -60,6 +70,12 @@ public class LoginActivity extends AppCompatActivity{
         if (TextUtils.isEmpty(username)) {
             musername.setError(getString(R.string.error_field_required));
             focusView = musername;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(base_url)) {
+            mbase_url.setError(getString(R.string.error_field_required));
+            focusView = mbase_url;
             cancel = true;
         }
 

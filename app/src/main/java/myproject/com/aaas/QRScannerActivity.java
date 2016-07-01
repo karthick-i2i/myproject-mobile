@@ -1,6 +1,7 @@
 package myproject.com.aaas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,15 +49,18 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
 
     @Override
     public void handleResult(Result rawResult) {
-        // Do something with the result here
 
+        // Do something with the result here
         Log.e("handler", rawResult.getText()); // Prints scan results
         Log.e("handler", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode)
+        Log.e("handler", getIntent().getExtras().get("musername").toString());
 
-        getIntent().getExtras().get("musername");
+        SharedPreferences prefs = getSharedPreferences("base_url", MODE_PRIVATE);
+        final String base_url = prefs.getString("base_url", null);
 
-        Retrofit retrofitAPI = RetrofitAPIBuilder.getInstance();
+        Retrofit retrofitAPI = RetrofitAPIBuilder.getInstance(base_url);
         UserAppService userAppService = retrofitAPI.create(UserAppService.class);
+
         Call call = userAppService.saveUserQRCode(getIntent()
                         .getExtras().get("musername").toString(),
                 rawResult.getText());
@@ -67,17 +71,14 @@ public class QRScannerActivity extends AppCompatActivity implements ZXingScanner
                 Intent result = new Intent(QRScannerActivity.this, ResultActivity.class);
                 startActivity(result);
             }
-
             @Override
             public void onFailure(Call<APIResponse<UserApp>> call, Throwable t) {
-                Log.e("handler", "1"+t.getMessage()); // Prints the scan format (qrcode)
-
+                Log.e("handler",t.getMessage());
             }
-
-
             // If you would like to resume scanning, call this method below:
             // mScannerView.resumeCameraPreview(this);
         });
+
     }
 }
 
